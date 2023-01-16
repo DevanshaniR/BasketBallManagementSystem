@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from datetime import datetime
 
-# Create your views here.
+
+@api_view(['GET'])
+def health(request):
+    return JsonResponse({'success': True, 'status': "live", "timestamp": datetime.utcnow()})
