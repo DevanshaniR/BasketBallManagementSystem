@@ -30,6 +30,16 @@ pip install -r requirements.txt
  python manage.py runserver  
 ```
 
+### run management command to populate data to DB
+```
+  python manage.py init_basketball_data 
+```
+### run tests
+```
+  python manage.py test
+```
+  
+ 
 ### POSTMAN
 ```
  http://127.0.0.1:8000/health (Content-Type: application/json) (GET)
