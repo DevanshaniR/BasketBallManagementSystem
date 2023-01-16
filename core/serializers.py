@@ -10,9 +10,8 @@ class GameSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
-
-
-
-
-
+class PlayerSerializer(serializers.ModelSerializer):
+    class Meta:
+        many = True
+        model = Player
+        fields = ['id', 'name', 'height', 'team']

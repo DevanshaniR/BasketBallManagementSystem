@@ -22,4 +22,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('health/', views.health, name='health'),
     path('score_board/', views.score_board, name='scoreboard'),
+    path('coach/<int:user_id>', views.coach, name='coach'),
 ]
