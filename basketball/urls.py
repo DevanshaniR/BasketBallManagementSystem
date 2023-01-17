@@ -23,4 +23,7 @@ urlpatterns = [
     path('health/', views.health, name='health'),
     path('score_board/', views.score_board, name='scoreboard'),
     path('coach/<int:user_id>', views.coach, name='coach'),
+    path('player_score/<int:user_id>/', views.player_score, name='player_score'),
+    path('all_team_details/<int:user_id>/', views.all_team_details, name='team_details'),
+    path('login_details/<int:user_id>/', views.login_details, name='login_details')
 ]

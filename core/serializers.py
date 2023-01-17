@@ -15,3 +15,10 @@ class PlayerSerializer(serializers.ModelSerializer):
         many = True
         model = Player
         fields = ['id', 'name', 'height', 'team']
+
+
+class TeamSerializer(serializers.ModelSerializer):
+    class Meta:
+        many = True
+        model = Team
+        fields = ['id', 'name']
