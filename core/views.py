@@ -17,6 +17,7 @@ def health(request):
 
 @api_view(['GET'])
 def score_board(request):
+    # view the scoreboard which display all games and final scores
     games = Game.objects.all()
     serializer = GameSerializer(games, many=True)
     return JsonResponse({'success': True, 'score_board': serializer.data})
@@ -24,6 +25,7 @@ def score_board(request):
 
 @api_view(['GET'])
 def coach(request, user_id):
+    # coach can view his team to view list of players,average score of the team,player personal details
     try:
         user_role = UserRole.objects.get(user_id=user_id)
         if user_role.role.type == 'P':
@@ -56,6 +58,8 @@ def coach(request, user_id):
 
 @api_view(['GET'])
 def player_score(request, user_id):
+    # coach can filter players based on average score
+    # filter_score pass as a query parameter so >90 percentile average score also can filter
     try:
         user_role = UserRole.objects.get(user_id=user_id)
         if user_role.role.type == 'P':
@@ -94,6 +98,7 @@ def player_score(request, user_id):
 
 @api_view(['GET'])
 def all_team_details(request, user_id):
+    # admin can view all team details,average scores,players list & details
     try:
         user_role = UserRole.objects.get(user_id=user_id)
         if user_role.role.type != 'A':
@@ -121,6 +126,7 @@ def all_team_details(request, user_id):
 
 @api_view(['GET'])
 def login_details(request, user_id):
+    # view statistics of site usage
     try:
         user_role = UserRole.objects.get(user_id=user_id)
         if user_role.role.type != 'A':
