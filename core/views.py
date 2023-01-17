@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from datetime import datetime
 from django.db.models import Avg, Sum, Count
 from django.db.models import ExpressionWrapper, F, fields
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from core.models import Game, Coach, UserRole, TeamStat, Player, PlayerStat, Team, UserLoginDetails
@@ -11,11 +13,13 @@ from core.serializers import GameSerializer, PlayerSerializer, TeamSerializer
 
 
 @api_view(['GET'])
+@permission_classes([AllowAny])
 def health(request):
     return JsonResponse({'success': True, 'status': "live", "timestamp": datetime.utcnow()})
 
 
 @api_view(['GET'])
+@login_required
 def score_board(request):
     # view the scoreboard which display all games and final scores
     games = Game.objects.all()
@@ -24,6 +28,7 @@ def score_board(request):
 
 
 @api_view(['GET'])
+@login_required
 def coach(request, user_id):
     # coach can view his team to view list of players,average score of the team,player personal details
     try:
@@ -57,6 +62,7 @@ def coach(request, user_id):
 
 
 @api_view(['GET'])
+@login_required
 def player_score(request, user_id):
     # coach can filter players based on average score
     # filter_score pass as a query parameter so >90 percentile average score also can filter
@@ -97,6 +103,7 @@ def player_score(request, user_id):
 
 
 @api_view(['GET'])
+@login_required
 def all_team_details(request, user_id):
     # admin can view all team details,average scores,players list & details
     try:
@@ -125,6 +132,7 @@ def all_team_details(request, user_id):
 
 
 @api_view(['GET'])
+@login_required
 def login_details(request, user_id):
     # view statistics of site usage
     try:

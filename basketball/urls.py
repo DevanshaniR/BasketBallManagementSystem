@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path
 
 from core import views
+from authentication.loginView import Login
+from authentication.logoutView import LogoutApi
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('login/', Login.as_view()),
+    path('logout/', LogoutApi.as_view()),
     path('health/', views.health, name='health'),
     path('score_board/', views.score_board, name='scoreboard'),
     path('coach/<int:user_id>', views.coach, name='coach'),
